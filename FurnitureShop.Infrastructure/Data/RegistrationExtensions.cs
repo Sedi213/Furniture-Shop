@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FurnitureShop.Core.Interface;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,7 +19,7 @@ namespace FurnitureShop.Infrastructure.Data
                 options.UseSqlServer(configuration["ConnectionStrings:LocalDbSqlServer"]);
             }); 
 
-            serviceCollection.AddScoped<FurnitureDbContext>();
+            serviceCollection.AddScoped<IFurnitureDbContext, FurnitureDbContext>();
         }
     }
 }
