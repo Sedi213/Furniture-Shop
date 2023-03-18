@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FurnitureShop.Core.Models
 {
-    public class User
+    public class VisitedHistory
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public int Role { get; set; }
+        public Guid UserId { get; set; }
+        public IEnumerable<Furniture> LastVisited { get; set; }
     }
 }

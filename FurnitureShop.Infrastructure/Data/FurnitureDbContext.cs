@@ -17,6 +17,8 @@ namespace FurnitureShop.Infrastructure.Data
 
         public DbSet<Furniture> Furnitures { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<VisitedHistory> VisitedHistories { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
