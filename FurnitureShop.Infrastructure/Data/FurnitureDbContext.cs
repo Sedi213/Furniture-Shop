@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FurnitureShop.Infrastructure.Data
 {
-    internal class FurnitureDbContext:DbContext
+    public class FurnitureDbContext:DbContext
     {
 
         public FurnitureDbContext(DbContextOptions options) : base(options) { 
