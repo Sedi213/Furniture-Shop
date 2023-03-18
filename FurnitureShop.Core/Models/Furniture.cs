@@ -13,5 +13,6 @@ namespace FurnitureShop.Core.Models
         public string Description { get; set; }
         public int Price { get; set; }
         public string ImgUrl { get; set; }
+        public User Owner { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace FurnitureShop.Core.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Role { get; set; }
+        public IEnumerable<Furniture> Basket { get; set; }
+        public IEnumerable<Furniture> History { get; set; }
     }
 }
