@@ -1,3 +1,4 @@
+using FurnitureShop.Core;
 using FurnitureShop.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddStorage(builder.Configuration);
-
+builder.Services.AddCore();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
