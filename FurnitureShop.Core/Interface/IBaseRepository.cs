@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FurnitureShop.Infrastructure.Data.Interfaces
+namespace FurnitureShop.Core.Interfaces
 {
     public interface IBaseRepository<T> where T : class 
     {

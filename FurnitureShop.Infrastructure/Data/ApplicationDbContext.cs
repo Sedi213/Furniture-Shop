@@ -1,18 +1,12 @@
-﻿using FurnitureShop.Core.Interface;
-using FurnitureShop.Core.Models;
+﻿using FurnitureShop.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FurnitureShop.Infrastructure.Data
 {
-    public class FurnitureDbContext:DbContext,IFurnitureDbContext
+    public class ApplicationDbContext:DbContext
     {
 
-        public FurnitureDbContext(DbContextOptions options) : base(options) { 
+        public ApplicationDbContext(DbContextOptions options) : base(options) { 
             Database.EnsureCreated();
         }
 
@@ -28,7 +22,7 @@ namespace FurnitureShop.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FurnitureDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }

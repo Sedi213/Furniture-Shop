@@ -1,12 +1,7 @@
-﻿using FurnitureShop.Core.Interface;
+﻿using FurnitureShop.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FurnitureShop.Infrastructure.Data
 {
@@ -14,12 +9,13 @@ namespace FurnitureShop.Infrastructure.Data
     {
         public static void AddStorage(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            serviceCollection.AddDbContext<FurnitureDbContext>(options =>
+            serviceCollection.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(configuration["ConnectionStrings:LocalDbSqlServer"]);
+                options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
             }); 
 
-            serviceCollection.AddScoped<IFurnitureDbContext, FurnitureDbContext>();
+            serviceCollection.AddScoped<ApplicationDbContext>();
+            serviceCollection.AddScoped<IUnitOfWork,UnitOfWork>();
         }
     }
 }

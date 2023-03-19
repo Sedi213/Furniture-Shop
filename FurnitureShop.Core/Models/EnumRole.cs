@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FurnitureShop.Core.Models
 {
-    enum EnumRole
+    public enum EnumRole
     {
         Customer=0,
         Seller=1

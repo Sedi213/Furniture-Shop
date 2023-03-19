@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FurnitureShop.Core.Helper
+namespace FurnitureShop.Core.Models
 {
-    public class BaseHelper//class for test data
+    public enum EnumCategory
     {
+        None,
+        Table
     }
 }

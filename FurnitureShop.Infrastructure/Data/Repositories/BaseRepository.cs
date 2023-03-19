@@ -1,4 +1,4 @@
-﻿using FurnitureShop.Infrastructure.Data.Interfaces;
+﻿using FurnitureShop.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace FurnitureShop.Infrastructure.Data.Repositories
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
 
-        private readonly DbContext _dbContext;
+        protected readonly DbContext _dbContext;
 
         public BaseRepository(DbContext dbContext)
         {

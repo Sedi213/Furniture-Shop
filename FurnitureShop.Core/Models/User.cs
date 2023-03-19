@@ -10,6 +10,6 @@ namespace FurnitureShop.Core.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Role { get; set; }
+        public EnumRole Role { get; set; } = EnumRole.Customer;
     }
 }

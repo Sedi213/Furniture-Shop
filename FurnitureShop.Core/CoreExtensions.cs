@@ -1,4 +1,5 @@
-﻿using FurnitureShop.Core.Interface;
+﻿using FurnitureShop.Core.Helper;
+using FurnitureShop.Core.Interface;
 using FurnitureShop.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,7 +17,7 @@ namespace FurnitureShop.Core
         {
             serviceCollection.AddScoped<SharedService>();
             serviceCollection.AddScoped<SellerService>();
-
+            serviceCollection.AddScoped<DataHelper>();//only for dev 
         }
     }
 }

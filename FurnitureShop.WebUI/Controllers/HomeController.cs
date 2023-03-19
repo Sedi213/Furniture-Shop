@@ -1,4 +1,5 @@
-﻿using FurnitureShop.WebUI.Models;
+﻿using FurnitureShop.Core.Services;
+using FurnitureShop.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,15 +7,16 @@ namespace FurnitureShop.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly SharedService _sharedService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SharedService sharedService)
         {
-            _logger = logger;
+            _sharedService = sharedService;
         }
 
         public IActionResult Index()
         {
+            _sharedService.GetFilterFurniture();
             return View();
         }
 

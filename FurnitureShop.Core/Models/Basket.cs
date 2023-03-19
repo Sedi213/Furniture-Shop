@@ -9,7 +9,7 @@ namespace FurnitureShop.Core.Models
     public class Basket
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public virtual User User { get; set; }
         public virtual IEnumerable<Furniture> UserBasket { get; set; }
     }
 }

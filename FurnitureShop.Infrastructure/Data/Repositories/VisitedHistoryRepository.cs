@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FurnitureShop.Core.Interface.RepositoryInterfaces;
+using FurnitureShop.Core.Models;
 
 namespace FurnitureShop.Infrastructure.Data.Repositories
 {
-    public class VisitedHistoryRepository
+    public class VisitedHistoryRepository : BaseRepository<VisitedHistory>, IVisitedHistoryRepository
     {
+        public VisitedHistoryRepository(ApplicationDbContext dbContext) : base(dbContext)
+        {
+
+        }
+        public ApplicationDbContext ApplicationDbContext
+        {
+            get { return _dbContext as ApplicationDbContext; }
+        }
     }
 }
