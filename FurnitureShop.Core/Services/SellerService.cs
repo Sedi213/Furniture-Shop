@@ -4,10 +4,10 @@ namespace FurnitureShop.Core.Services
 {
     public class SellerService
     {
-        private readonly IUnitOfWork _dbContext;
-        public SellerService(IUnitOfWork dbContext)
+        private readonly IUnitOfWork _unitOfWork;
+        public SellerService(IUnitOfWork unitOfWork)
         {
-            _dbContext=dbContext;
+            _unitOfWork= unitOfWork;
         }
     }
 }

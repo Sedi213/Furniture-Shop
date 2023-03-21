@@ -16,7 +16,7 @@ namespace FurnitureShop.WebUI.Controllers
 
         public IActionResult Index()
         {
-            _sharedService.GetFilterFurniture();
+            _sharedService.GetFurnitureByFilter();
             return View();
         }
 

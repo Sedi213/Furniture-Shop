@@ -18,7 +18,7 @@ namespace FurnitureShop.Core.Services
         }
 
 
-        public IEnumerable<Furniture> GetFilterFurniture(
+        public IEnumerable<Furniture> GetFurnitureByFilter    (
             int skip = 0,
             int take = 10,
             EnumCategory? category = null,
@@ -26,7 +26,7 @@ namespace FurnitureShop.Core.Services
             int? maxPrice = null,
             string containPart = "")
         {
-            return _unitOfWork.Furnitures.GetFilterEntity(skip,
+            return _unitOfWork.Furnitures.GetFurnitureEntityByFilter(skip,
                                                           take,
                                                           category,
                                                           minPrice,

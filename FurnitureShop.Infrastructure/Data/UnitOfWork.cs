@@ -1,34 +1,58 @@
 ﻿using FurnitureShop.Core.Interface.RepositoryInterfaces;
 using FurnitureShop.Core.Interfaces;
 using FurnitureShop.Infrastructure.Data.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FurnitureShop.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IServiceProvider _provider;
+        private IBasketRepository _basketRepository;
+        private IVisitedHistoryRepository _visitedHistorytRepository;
+        private IFurnitureRepository _furnitureRepository;
+        private IUserRepository _userRepository;
 
-        public UnitOfWork(ApplicationDbContext dbContext)
+        public UnitOfWork(ApplicationDbContext dbContext, IServiceProvider provider)
         {
             _dbContext = dbContext;
-            Baskets = new BasketRepository(_dbContext);
-            Furnitures = new FurnitureRepository(_dbContext);
-            Users = new UserRepository(_dbContext);
-            VisitedHistories = new VisitedHistoryRepository(_dbContext);
+            _provider= provider;
         }
-        public IBasketRepository Baskets { get; private set; }
-        public IFurnitureRepository Furnitures { get; private set; }
-        public IUserRepository Users { get; private set; }
-        public IVisitedHistoryRepository VisitedHistories { get; private set; }
+        public IBasketRepository Baskets { get {
+                return InitService(ref _basketRepository);
+            }  }
+        public IFurnitureRepository Furnitures { get
+            {
+                return InitService(ref _furnitureRepository);
+            }
+        }
+        public IUserRepository Users { get
+            {
+                return InitService(ref _userRepository);
+            }  }
+        public IVisitedHistoryRepository VisitedHistories { get
+            {
+                return InitService(ref _visitedHistorytRepository);
+            }
+        }
+
+
+        private T InitService<T>(ref T member)//for lazy init
+        {
+            return member ??= _provider.GetService<T>();
+        }
+
+
 
         public void Dispose()
         {
             _dbContext.Dispose();
         }
 
-        public async Task<int> SaveAsync()
+        public  Task<int> SaveAsync()
         {
-            return await _dbContext.SaveChangesAsync();
+            return  _dbContext.SaveChangesAsync();
         }
     }
 }

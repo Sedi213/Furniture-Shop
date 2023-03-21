@@ -1,4 +1,6 @@
-﻿using FurnitureShop.Core.Interfaces;
+﻿using FurnitureShop.Core.Interface.RepositoryInterfaces;
+using FurnitureShop.Core.Interfaces;
+using FurnitureShop.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,11 @@ namespace FurnitureShop.Infrastructure.Data
 
             serviceCollection.AddScoped<ApplicationDbContext>();
             serviceCollection.AddScoped<IUnitOfWork,UnitOfWork>();
+            //repository for lazy init
+            serviceCollection.AddScoped<IBasketRepository,BasketRepository>();
+            serviceCollection.AddScoped<IFurnitureRepository, FurnitureRepository>();
+            serviceCollection.AddScoped<IVisitedHistoryRepository, VisitedHistoryRepository>();
+            serviceCollection.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace FurnitureShop.Core.Interface.RepositoryInterfaces
 {
     public interface IFurnitureRepository : IBaseRepository<Furniture>
     {
-        IEnumerable<Furniture> GetFilterEntity(
+        IEnumerable<Furniture> GetFurnitureEntityByFilter(
             int skip = 0,
             int take = 10,
             EnumCategory? category = null,

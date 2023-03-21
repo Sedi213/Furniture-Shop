@@ -6,18 +6,16 @@ namespace FurnitureShop.Infrastructure.Data
     public class ApplicationDbContext:DbContext
     {
 
-        public ApplicationDbContext(DbContextOptions options) : base(options) { 
-            Database.EnsureCreated();
-        }
+        public ApplicationDbContext(DbContextOptions options) : base(options) {}
 
         public DbSet<Furniture> Furnitures { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<VisitedHistory> VisitedHistories { get; set; }
         public DbSet<Basket> Baskets { get; set; }
 
-        public async Task<int> SaveChangesAsync()
+        public Task<int> SaveChangesAsync()
         {
-           return await base.SaveChangesAsync();
+           return base.SaveChangesAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

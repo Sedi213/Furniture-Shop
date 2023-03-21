@@ -1,4 +1,5 @@
-﻿using FurnitureShop.Core.Interfaces;
+﻿using FurnitureShop.Core.Interface.RepositoryInterfaces;
+using FurnitureShop.Core.Interfaces;
 using FurnitureShop.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,10 @@ namespace FurnitureShop.Core.Helper
             _unitOfWork = unitOfWork;
         }
 
-        public void FillTableTestData()
+        public async void FillTableTestData()
         {
+            IFurnitureRepository furnitureRepository = _unitOfWork.Furnitures;
+            IUserRepository userRepository = _unitOfWork.Users;
             var customer1 = new User()
             {
                 Id= Guid.NewGuid(),
@@ -43,10 +46,10 @@ namespace FurnitureShop.Core.Helper
                 Name = "First",
                 Role = EnumRole.Seller
             };
-            _unitOfWork.Users.Add(customer1);
-            _unitOfWork.Users.Add(customer2);
-            _unitOfWork.Users.Add(seller1);
-            _unitOfWork.Users.Add(seller2);
+            userRepository.Add(customer1);
+            userRepository.Add(customer2);
+            userRepository.Add(seller1);
+            userRepository.Add(seller2);
 
             var furniture1 = new Furniture()
             {
@@ -120,15 +123,15 @@ namespace FurnitureShop.Core.Helper
                 Price = 75,
                 Category = EnumCategory.None
             };
-            _unitOfWork.Furnitures.Add(furniture1);
-            _unitOfWork.Furnitures.Add(furniture2);
-            _unitOfWork.Furnitures.Add(furniture3);
-            _unitOfWork.Furnitures.Add(furniture4);
-            _unitOfWork.Furnitures.Add(furniture5);
-            _unitOfWork.Furnitures.Add(furniture7);
-            _unitOfWork.Furnitures.Add(furniture6);
-            _unitOfWork.Furnitures.Add(furniture8);
-            _unitOfWork.SaveAsync();
+            furnitureRepository.Add(furniture1);
+            furnitureRepository.Add(furniture2);
+            furnitureRepository.Add(furniture3);
+            furnitureRepository.Add(furniture4);
+            furnitureRepository.Add(furniture5);
+            furnitureRepository.Add(furniture7);
+            furnitureRepository.Add(furniture6);
+            furnitureRepository.Add(furniture8);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FurnitureShop.Infrastructure.Data.Repositories
 
         }
 
-        public IEnumerable<Furniture> GetFilterEntity(
+        public IEnumerable<Furniture> GetFurnitureEntityByFilter(
             int skip = 0,
             int take = 10,
             EnumCategory? category = null,
