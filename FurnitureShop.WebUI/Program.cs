@@ -1,5 +1,7 @@
 using FurnitureShop.Core;
+using FurnitureShop.WebUI.Mapping;
 using FurnitureShop.Infrastructure.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,15 +9,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddCore();
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.Services.GetService<ApplicationDbContext>().Database.EnsureCreated();
-
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+        dbContext.Database.EnsureCreated();
+    }
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -28,6 +36,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Views}/{action=Index}/{id?}");
 
 app.Run();

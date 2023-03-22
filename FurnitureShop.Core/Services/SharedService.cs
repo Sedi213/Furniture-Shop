@@ -18,7 +18,7 @@ namespace FurnitureShop.Core.Services
         }
 
 
-        public IEnumerable<Furniture> GetFurnitureByFilter    (
+        public IEnumerable<Furniture> GetFurnitureByFilter(
             int skip = 0,
             int take = 10,
             EnumCategory? category = null,
@@ -34,5 +34,24 @@ namespace FurnitureShop.Core.Services
                                                           containPart);
         }
 
+
+        public async Task AddToBasket(Furniture furniture, User user)
+        {
+            var entity = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id);
+            if (entity.Count() != 0)
+            {
+                entity.First().UserBasket.Append(furniture);
+            }
+            else
+            {
+                _unitOfWork.Baskets.Add(new Basket
+                {
+                    Id = Guid.NewGuid(),
+                    User = user,
+                    UserBasket = new List<Furniture>() { furniture }
+                });
+            }
+            await _unitOfWork.SaveAsync();
+        }
     }
 }

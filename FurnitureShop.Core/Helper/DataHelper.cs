@@ -18,7 +18,7 @@ namespace FurnitureShop.Core.Helper
             _unitOfWork = unitOfWork;
         }
 
-        public async void FillTableTestData()
+        public async Task FillTableTestData()
         {
             IFurnitureRepository furnitureRepository = _unitOfWork.Furnitures;
             IUserRepository userRepository = _unitOfWork.Users;

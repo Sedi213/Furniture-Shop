@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FurnitureIndexVM>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    function RedirectToFurniturePage(id) {
+        console.log(id)
+    }
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @foreach(var item in Model)
+    {
+        
+        <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
+            <img scr=@item.ImgUrl/>
+            <p>@item.Name</p>
+            <p>@item.Price</p>
+        </div>
+    }
+</div>
+
+<style>
+    .item{
+        background-color:red;
+    }
+</style>
