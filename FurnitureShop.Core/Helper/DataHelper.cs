@@ -55,7 +55,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller1,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR1",
                 Price = 125,
                 Category = EnumCategory.None
@@ -64,7 +64,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller1,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR2",
                 Price = 25,
                 Category = EnumCategory.Table
@@ -73,7 +73,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller2,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR3",
                 Price = 225,
                 Category = EnumCategory.Table
@@ -82,7 +82,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller2,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR1",
                 Price = 75,
                 Category = EnumCategory.None
@@ -91,7 +91,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller1,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR56",
                 Price = 125,
                 Category = EnumCategory.None
@@ -100,7 +100,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller1,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR6",
                 Price = 25,
                 Category = EnumCategory.Table
@@ -109,7 +109,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller2,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR7",
                 Price = 225,
                 Category = EnumCategory.Table
@@ -118,7 +118,7 @@ namespace FurnitureShop.Core.Helper
             {
                 Id = Guid.NewGuid(),
                 Owner = seller2,
-                ImgUrl = "",
+                ImgUrl = "https://secure.img1-cg.wfcdn.com/im/32274058/compr-r85/1530/153082342/geary-round-dining-table.jpg",
                 Name = "FUR8",
                 Price = 75,
                 Category = EnumCategory.None

@@ -4,6 +4,7 @@ using FurnitureShop.Core.Services;
 using FurnitureShop.WebUI.Models;
 using FurnitureShop.WebUI.Models.DTO;
 using FurnitureShop.WebUI.Models.VM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -21,7 +22,7 @@ namespace FurnitureShop.WebUI.Controllers
             _mapper = mapper;
         }
 
-        public IEnumerable<FurnitureIndexVM> Index(IndexFilterDTO dto)
+        public IEnumerable<FurnitureVM> Index(IndexFilterDTO dto)
         {
             var rawlist = _sharedService.GetFurnitureByFilter(dto.skip ?? 0,
                                                               dto.take ?? 10,
@@ -29,14 +30,15 @@ namespace FurnitureShop.WebUI.Controllers
                                                               dto.minPrice,
                                                               dto.maxPrice,
                                                               dto.containPart);
-            var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureIndexVM>>(rawlist);
+            var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawlist);
             return mapedlist ;
         }
 
         [HttpPost]
-        public IActionResult AddToBasket()
+        //[Authorize]//feature for future identityserver4
+        public IActionResult AddToBasket(Guid Id)
         {
-            //_sharedService.AddToBasket()
+            _sharedService.AddToBasket(Id, Guid.Empty);//With authorize will be changes second param 
             return Ok();
         }
         

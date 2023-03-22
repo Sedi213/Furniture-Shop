@@ -35,12 +35,15 @@ namespace FurnitureShop.Core.Services
         }
 
 
-        public async Task AddToBasket(Furniture furniture, User user)
+        public async Task AddToBasket(Guid furnitureid, Guid userid)
         {
-            var entity = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id);
-            if (entity.Count() != 0)
+            var furniture = _unitOfWork.Furnitures.Find(x => x.Id == furnitureid).First();
+            //var user = _unitOfWork.Users.Find(x => x.Id == userid).First();
+            var user=_unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
+            var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id);
+            if (basket.Count() != 0)
             {
-                entity.First().UserBasket.Append(furniture);
+                basket.First().UserBasket.Append(furniture);
             }
             else
             {
@@ -52,6 +55,12 @@ namespace FurnitureShop.Core.Services
                 });
             }
             await _unitOfWork.SaveAsync();
+        }
+
+
+        public  Furniture GetFurnitureById(Guid id)
+        {
+            return  _unitOfWork.Furnitures.Get(id);
         }
     }
 }

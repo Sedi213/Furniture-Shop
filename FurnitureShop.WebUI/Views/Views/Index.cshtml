@@ -1,29 +1,44 @@
-﻿@model IEnumerable<FurnitureIndexVM>
+﻿@model IEnumerable<FurnitureVM>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <script>
     function RedirectToFurniturePage(id) {
-        console.log(id)
+        window.location.href = window.location.protocol + "//" + window.location.host + "/"+"Views/FurniturePage?id="+id
     }
 </script>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div class="contn">
     @foreach(var item in Model)
     {
         
         <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
-            <img scr=@item.ImgUrl/>
+            <img class="photo" src=@item.ImgUrl  />
             <p>@item.Name</p>
             <p>@item.Price</p>
         </div>
     }
 </div>
-
+@*Relocate style to static file at future*@
 <style>
+    .photo{
+        width:95px;
+        height:95px;
+    }
+
     .item{
-        background-color:red;
+        background-color: rgb(212, 253, 255);
+        border-radius:15px;
+        width:125px;
+        height:200px;
+        margin:45px;
+        padding:15px;
+        
+    }
+
+    .contn{
+        display:flex;     
+        flex-wrap: wrap;
     }
 </style>

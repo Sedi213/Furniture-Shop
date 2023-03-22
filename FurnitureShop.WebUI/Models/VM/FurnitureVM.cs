@@ -4,7 +4,7 @@ using FurnitureShop.Core.Models;
 
 namespace FurnitureShop.WebUI.Models.VM
 {
-    public class FurnitureIndexVM : IMapWith<Furniture>
+    public class FurnitureVM : IMapWith<Furniture>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace FurnitureShop.WebUI.Models.VM
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Furniture, FurnitureIndexVM>()
+            profile.CreateMap<Furniture, FurnitureVM>()
                 .ForMember(frVm => frVm.Id,
                     opt => opt.MapFrom(fr => fr.Id))
                 .ForMember(frVm => frVm.Name,

@@ -1,0 +1,37 @@
+﻿@model FurnitureVM
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="contn">
+    <img class="photo" src=@Model.ImgUrl />
+    <div class="text-block">
+        <p>Name : @Model.Name</p>
+        <p>Category : @Model.Category </p>
+        <p>Price : @Model.Price $</p>
+        <form asp-action="AddToBasket" asp-controller="Api" method="post">
+            <input type="hidden" asp-for="Id"/>
+            <button type="submit">Order</button>
+        </form>
+    </div>
+</div>
+
+@*Relocate style to static file at future*@
+<style>
+    body{
+        background-color: rgb(212, 253, 255);
+    }
+    .photo {
+        width: 300px;
+        height: 300px;
+    }
+
+    .text-block {
+        margin: 45px;
+        padding: 15px;
+    }
+
+    .contn {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
