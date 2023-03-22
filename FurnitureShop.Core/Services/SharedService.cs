@@ -38,16 +38,14 @@ namespace FurnitureShop.Core.Services
 
         public async Task AddToBasket(Guid furnitureid, Guid userid)
         {
-            //var user = _unitOfWork.Users.Find(x => x.Id == userid).First();
-            var user=_unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
+            var user = _unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
             var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id).FirstOrDefault();
-
 
             if (basket != null)
             {
-                var entities=JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
+                var entities = JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
                 var newstr = JsonSerializer.Serialize<IEnumerable<Guid>>(entities.Append(furnitureid));
-                basket.UserBasketJSONSerializetedFurnitureGuid= newstr;
+                basket.UserBasketJSONSerializetedFurnitureGuid = newstr;
             }
             else
             {
@@ -55,16 +53,34 @@ namespace FurnitureShop.Core.Services
                 {
                     Id = Guid.NewGuid(),
                     User = user,
-                    UserBasketJSONSerializetedFurnitureGuid = JsonSerializer.Serialize<IEnumerable<Guid>>(new List<Guid>() { furnitureid})
+                    UserBasketJSONSerializetedFurnitureGuid = JsonSerializer.Serialize<IEnumerable<Guid>>(new List<Guid>() { furnitureid })
                 });
             }
             await _unitOfWork.SaveAsync();
         }
 
 
-        public  Furniture GetFurnitureById(Guid id)
+        public Furniture GetFurnitureById(Guid id)
         {
-            return  _unitOfWork.Furnitures.Get(id);
+            return _unitOfWork.Furnitures.Get(id);
+        }
+
+
+        public IEnumerable<Furniture> GetBasketByUserId(Guid userId)
+        {
+            var tempuserId = _unitOfWork.Users.GetAll().First();//will be changed with IS4
+            var basket = _unitOfWork.Baskets.Find(x => x.User.Id == tempuserId.Id).FirstOrDefault();
+            if (basket == null)
+            {
+                return Enumerable.Empty<Furniture>();
+            }
+            var GuidList = JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
+            var entities = new List<Furniture>();
+            foreach(var item in GuidList) //map from id to entity
+            {
+                entities.Add(_unitOfWork.Furnitures.Find(x=>x.Id==item).First());
+            }
+            return entities;
         }
     }
 }

@@ -35,6 +35,15 @@ namespace FurnitureShop.WebUI.Controllers
             return View(mappedEntity);
         }
 
+        [HttpGet]
+        public IActionResult Basket()
+        {
+            var rawList=_sharedService.GetBasketByUserId(Guid.Empty);//will be changed with IS4
+            var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawList);
+            return View(mapedlist);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
