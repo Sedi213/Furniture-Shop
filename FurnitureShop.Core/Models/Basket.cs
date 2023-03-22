@@ -10,6 +10,6 @@ namespace FurnitureShop.Core.Models
     {
         public Guid Id { get; set; }
         public virtual User User { get; set; }
-        public virtual IEnumerable<Furniture> UserBasket { get; set; }
+        public string UserBasketJSONSerializetedFurnitureGuid { get; set; }
     }
 }

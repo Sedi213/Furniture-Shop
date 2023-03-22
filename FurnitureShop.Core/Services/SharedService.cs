@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FurnitureShop.Core.Services
@@ -37,13 +38,16 @@ namespace FurnitureShop.Core.Services
 
         public async Task AddToBasket(Guid furnitureid, Guid userid)
         {
-            var furniture = _unitOfWork.Furnitures.Find(x => x.Id == furnitureid).First();
             //var user = _unitOfWork.Users.Find(x => x.Id == userid).First();
             var user=_unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
-            var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id);
-            if (basket.Count() != 0)
+            var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id).FirstOrDefault();
+
+
+            if (basket != null)
             {
-                basket.First().UserBasket.Append(furniture);
+                var entities=JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
+                var newstr = JsonSerializer.Serialize<IEnumerable<Guid>>(entities.Append(furnitureid));
+                basket.UserBasketJSONSerializetedFurnitureGuid= newstr;
             }
             else
             {
@@ -51,7 +55,7 @@ namespace FurnitureShop.Core.Services
                 {
                     Id = Guid.NewGuid(),
                     User = user,
-                    UserBasket = new List<Furniture>() { furniture }
+                    UserBasketJSONSerializetedFurnitureGuid = JsonSerializer.Serialize<IEnumerable<Guid>>(new List<Guid>() { furnitureid})
                 });
             }
             await _unitOfWork.SaveAsync();

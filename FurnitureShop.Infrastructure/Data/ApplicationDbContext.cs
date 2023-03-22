@@ -13,11 +13,6 @@ namespace FurnitureShop.Infrastructure.Data
         public DbSet<VisitedHistory> VisitedHistories { get; set; }
         public DbSet<Basket> Baskets { get; set; }
 
-        public Task<int> SaveChangesAsync()
-        {
-           return base.SaveChangesAsync();
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
