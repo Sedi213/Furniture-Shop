@@ -19,14 +19,20 @@ namespace FurnitureShop.WebUI.Controllers
             _sharedService = sharedService;
             _mapper = mapper;
         }
+
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]IndexFilterDTO? dto)
         {
-            var rawlist = _sharedService.GetFurnitureByFilter();
+            var rawlist = _sharedService.GetFurnitureByFilter(dto.skip ?? 0,
+                                                              dto.take ?? 10,
+                                                              (EnumCategory?)(dto.category),
+                                                              dto.minPrice,
+                                                              dto.maxPrice,
+                                                              dto.containPart);
             var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawlist);
+            ViewData["CountOfElement"] = _sharedService.GetCountOfElement();
             return View(mapedlist);
         }
-
         [HttpGet("Views/FurniturePage/{id?}")]
         public IActionResult FurniturePage(Guid id)
         {

@@ -65,7 +65,10 @@ namespace FurnitureShop.Core.Services
             return _unitOfWork.Furnitures.Get(id);
         }
 
-
+        public int GetCountOfElement()
+        {
+            return _unitOfWork.Furnitures.GetAll().Count();
+        }
         public IEnumerable<Furniture> GetBasketByUserId(Guid userId)
         {
             var tempuserId = _unitOfWork.Users.GetAll().First();//will be changed with IS4

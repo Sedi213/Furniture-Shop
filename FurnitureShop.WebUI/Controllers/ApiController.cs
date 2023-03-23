@@ -22,17 +22,6 @@ namespace FurnitureShop.WebUI.Controllers
             _mapper = mapper;
         }
 
-        public IEnumerable<FurnitureVM> Index(IndexFilterDTO dto)
-        {
-            var rawlist = _sharedService.GetFurnitureByFilter(dto.skip ?? 0,
-                                                              dto.take ?? 10,
-                                                              (EnumCategory)(dto.category ?? 0),
-                                                              dto.minPrice,
-                                                              dto.maxPrice,
-                                                              dto.containPart);
-            var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawlist);
-            return mapedlist ;
-        }
 
         [HttpPost]
         //[Authorize]//feature for future identityserver4

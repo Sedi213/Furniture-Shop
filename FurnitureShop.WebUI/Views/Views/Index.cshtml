@@ -1,44 +1,62 @@
 ﻿@model IEnumerable<FurnitureVM>
 @{
     ViewData["Title"] = "Home Page";
+
+    //logit to corect view
+    Microsoft.Extensions.Primitives.StringValues take;
+    Microsoft.Extensions.Primitives.StringValues skip;
+    Context.Request.Query.TryGetValue("skip", out skip);
+    Context.Request.Query.TryGetValue("take", out take);
+    int takeInt = 10;
+    int skipInt = 0;
+    int.TryParse(skip.ToString(),out skipInt);
+    int.TryParse(take.ToString(), out takeInt);
+    takeInt = takeInt == 0 ? 10 : takeInt;
 }
+
 
 <script>
     function RedirectToFurniturePage(id) {
-        window.location.href = window.location.protocol + "//" + window.location.host + "/"+"Views/FurniturePage?id="+id
+        window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/FurniturePage?id=" + id
     }
 </script>
 
 <div class="contn">
-    @foreach(var item in Model)
+
+    @foreach (var item in Model)
     {
-        
+
         <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
-            <img class="photo" src=@item.ImgUrl  />
+            <img class="photo" src=@item.ImgUrl />
             <p>@item.Name</p>
             <p>@item.Price</p>
         </div>
     }
 </div>
+<pager asp-paged-total-element='Convert.ToInt32(@ViewData["CountOfElement"])'
+       asp-paged-index=@skipInt/@takeInt
+       asp-paged-take=@takeInt
+       asp-controller='Views'
+       asp-paged-list-url='Index'
+       asp-route-parameter="skip"></pager>
 @*Relocate style to static file at future*@
 <style>
-    .photo{
-        width:95px;
-        height:95px;
+    .photo {
+        width: 95px;
+        height: 95px;
     }
 
-    .item{
+    .item {
         background-color: rgb(212, 253, 255);
-        border-radius:15px;
-        width:125px;
-        height:200px;
-        margin:45px;
-        padding:15px;
-        
+        border-radius: 15px;
+        width: 125px;
+        height: 200px;
+        margin: 45px;
+        padding: 15px;
     }
 
-    .contn{
-        display:flex;     
+    .contn {
+        display: flex;
         flex-wrap: wrap;
     }
 </style>
