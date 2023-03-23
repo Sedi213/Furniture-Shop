@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "wwwroot/css/Styles/bundle.css",
+    "inputFiles": [
+      "wwwroot/css/Styles/FunirutePage.css",
+      "wwwroot/css/Styles/Index.css",
+      "wwwroot/css/Styles/Basket.css"
+    ]
+  }
+]

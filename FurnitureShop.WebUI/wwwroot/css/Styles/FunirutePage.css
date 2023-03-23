@@ -1,0 +1,18 @@
+﻿body {
+  background-color: rgb(212, 253, 255);
+}
+
+.mainphoto {
+  width: 300px;
+  height: 300px;
+}
+
+.text-block {
+  margin: 45px;
+  padding: 15px;
+}
+
+.contn {
+  display: flex;
+  flex-wrap: wrap;
+}

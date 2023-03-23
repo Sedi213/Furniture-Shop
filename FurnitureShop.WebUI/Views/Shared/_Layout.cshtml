@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FurnitureShop.WebUI.styles.css" asp-append-version="true" />
+    <environment include="Development">       
+        <link href="~/css/styles/bundle.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/styles/bundle.min.css" rel="stylesheet" />
+    </environment>
 </head>
 <body>
     <header>
