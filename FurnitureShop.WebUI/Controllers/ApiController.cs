@@ -25,7 +25,7 @@ namespace FurnitureShop.WebUI.Controllers
 
         [HttpPost]
         //[Authorize]//feature for future identityserver4
-        public IActionResult AddToBasket(Guid Id)
+        public IActionResult AddToBasket([FromBody]Guid Id)
         {
             _sharedService.AddToBasket(Id, Guid.Empty);//With authorize will be changes second param 
             return Ok();

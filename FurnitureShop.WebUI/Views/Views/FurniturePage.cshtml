@@ -2,24 +2,55 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+
 <div class="contn">
     <img class="photo" src=@Model.ImgUrl />
     <div class="text-block">
         <p>Name : @Model.Name</p>
         <p>Category : @Model.Category </p>
         <p>Price : @Model.Price $</p>
-        <form asp-action="AddToBasket" asp-controller="Api" method="post">
-            <input type="hidden" asp-for="Id"/>
-            <button type="submit">Order</button>
-        </form>
+        <input type="hidden" id="hidden" value="@Model.Id" />
+        <button id="btn">Order</button>
     </div>
+
 </div>
 
+
+<script>
+
+    var elem = document.getElementById("btn");
+    elem.addEventListener("click", () => {
+        fetchToBasket();
+    });
+
+
+    var id = document.getElementById("hidden").value;
+    function RedirectToBasket() {
+        window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/Basket"
+    }
+    async function fetchToBasket() {
+        var strBody = JSON.stringify(id);
+        console.log(strBody);
+        await fetch('/Api/AddToBasket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: strBody
+        }).then(RedirectToBasket);
+    }
+
+
+</script>
 @*Relocate style to static file at future*@
 <style>
-    body{
+    body {
         background-color: rgb(212, 253, 255);
     }
+
     .photo {
         width: 300px;
         height: 300px;
