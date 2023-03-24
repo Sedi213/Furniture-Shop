@@ -71,7 +71,7 @@ namespace FurnitureShop.WebUI.TagHelpers
         public string RouteParameter { get; set; } = null!;
 
         [HtmlAttributeName(PagedListRouteDataAttributeName)]
-        public object? RouteParameters { get; set; }
+        public Dictionary<string,string> RouteParameters { get; set; }
 
         /// <summary>
         /// The URL fragment name.
@@ -133,19 +133,15 @@ namespace FurnitureShop.WebUI.TagHelpers
 
         private TagBuilder GenerateLink(string linkText, int routeValue)
         {
-            var routeValues = new RouteValueDictionary(_routeValues) { { RouteParameter, (routeValue*TakeItemPerPage).ToString() } };
+            var routeValues = new RouteValueDictionary(_routeValues);
             if (RouteParameters != null)
             {
-                var values = RouteParameters.GetType().GetProperties();
-                if (values.Any())
-                {
-                    foreach (var propertyInfo in values)
+                    foreach (var item in RouteParameters)
                     {
-                        routeValues.Add(propertyInfo.Name, propertyInfo.GetValue(RouteParameters));
+                        routeValues.Add(item.Key, item.Value);
                     }
-                }
             }
-
+            routeValues["skip"] = (routeValue * TakeItemPerPage).ToString();
             return _htmlGenerator.GenerateActionLink(
                 viewContext: ViewContext,
                 actionName: ActionName,

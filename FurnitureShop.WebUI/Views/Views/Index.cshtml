@@ -1,17 +1,10 @@
-﻿@model IEnumerable<FurnitureVM>
+﻿@model IndexVM
 @{
     ViewData["Title"] = "Home Page";
 
     //logit to corect view
-    Microsoft.Extensions.Primitives.StringValues take;
-    Microsoft.Extensions.Primitives.StringValues skip;
-    Context.Request.Query.TryGetValue("skip", out skip);
-    Context.Request.Query.TryGetValue("take", out take);
-    int takeInt = 10;
-    int skipInt = 0;
-    int.TryParse(skip.ToString(),out skipInt);
-    int.TryParse(take.ToString(), out takeInt);
-    takeInt = takeInt == 0 ? 10 : takeInt;
+    int takeInt = int.Parse(Model.previousQuery["take"]);
+    int skipInt = int.Parse(Model.previousQuery["skip"]);
 }
 
 
@@ -21,9 +14,23 @@
     }
 </script>
 
+<div id="filter" class="filter">
+    <form asp-action="Index" asp-controller="Views" method="get">
+        <label>Name : </label>
+        <input type="text" name="containPart" />
+        <label>min Price : </label>
+        <input type="number" name="minPrice" />
+        <label>max Price : </label>
+        <input type="number" name="maxPrice" />
+        <label>Category : </label>
+        <input type="number" name="category" />
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
 <div class="contn">
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.mapedlist)
     {
 
         <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
@@ -33,9 +40,10 @@
         </div>
     }
 </div>
-<pager asp-paged-total-element='Convert.ToInt32(@ViewData["CountOfElement"])'
+<pager asp-paged-total-element=@Model.CountMappedItem;
        asp-paged-index=@skipInt/@takeInt
        asp-paged-take=@takeInt
        asp-controller='Views'
        asp-paged-list-url='Index'
-       asp-route-parameter="skip"></pager>
+       asp-route-parameter="skip"
+       asp-route-data=@Model.previousQuery></pager>

@@ -39,6 +39,29 @@ namespace FurnitureShop.Infrastructure.Data.Repositories
                 entities = entities.Take(take);
             return entities;
         }
+
+        public int GetCountFurnitureEntityByFilter(
+            EnumCategory? category = null,
+            int? minPrice = null,
+            int? maxPrice = null,
+            string containPart = "")
+        {
+            int ActualMinPrice = minPrice ?? 0;
+            int ActualMaxPrice = maxPrice ?? ApplicationDbContext.Furnitures.Max(x => x.Price);
+
+            if (ActualMinPrice > ActualMaxPrice)
+                return 0;
+            IEnumerable<Furniture> entities = null;
+            if (category == null)
+                entities = ApplicationDbContext.Furnitures.Where(x => x.Name.Contains(containPart) &&
+                                                        x.Price >= ActualMinPrice &&
+                                                        x.Price <= ActualMaxPrice);
+            else entities = ApplicationDbContext.Furnitures.Where(x => x.Name.Contains(containPart) &&
+                                                        x.Price >= ActualMinPrice &&
+                                                        x.Price <= ActualMaxPrice &&
+                                                        x.Category == category);
+            return entities.Count();
+        }
         public ApplicationDbContext ApplicationDbContext
         {
             get { return _dbContext as ApplicationDbContext; }

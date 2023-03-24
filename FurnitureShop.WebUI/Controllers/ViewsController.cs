@@ -21,30 +21,62 @@ namespace FurnitureShop.WebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index([FromQuery]IndexFilterDTO? dto)
+        public IActionResult Index([FromQuery] IndexFilterDTO? dto)
         {
             var rawlist = _sharedService.GetFurnitureByFilter(dto.skip ?? 0,
                                                               dto.take ?? 10,
                                                               (EnumCategory?)(dto.category),
                                                               dto.minPrice,
                                                               dto.maxPrice,
-                                                              dto.containPart);
+                                                              dto.containPart ?? "");//TODO Add validator
             var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawlist);
-            ViewData["CountOfElement"] = _sharedService.GetCountOfElement();
-            return View(mapedlist);
+            var count = _sharedService.GetCountOfElementByFilter((EnumCategory?)(dto.category),
+                                                              dto.minPrice,
+                                                              dto.maxPrice,
+                                                              dto.containPart ?? "");//twice ask to db not good .
+                                                                                     //Need to rework
+                                                                                     //But i cant return from repository smt that is not Furniture?
+            
+            var VM = new IndexVM()
+            {
+                mapedlist = mapedlist,
+                CountMappedItem = count,
+                previousQuery = GetDictionaryQueryByDTO(dto)
+            };
+            return View(VM);
         }
+
+        [NonAction]
+        private Dictionary<string,string> GetDictionaryQueryByDTO(IndexFilterDTO dto)
+        {
+            var dictionary = new Dictionary<string, string>();
+            if (dto.containPart != string.Empty)
+                dictionary.Add("containPart", dto.containPart);
+            if (dto.category != null)
+                dictionary.Add("category", dto.category.ToString());
+            if (dto.minPrice != null)
+                dictionary.Add("minPrice", dto.minPrice.ToString());
+            if (dto.maxPrice != null)
+                dictionary.Add("maxPrice", dto.maxPrice.ToString());
+            if (dto.skip != null)
+                dictionary.Add("skip", dto.skip.ToString());
+            if (dto.take != null)
+                dictionary.Add("take", dto.take.ToString());
+            return dictionary;
+        }
+
         [HttpGet("Views/FurniturePage/{id?}")]
         public IActionResult FurniturePage(Guid id)
         {
-            var rawEntity=_sharedService.GetFurnitureById(id);
-            var mappedEntity=_mapper.Map<Furniture,FurnitureVM>(rawEntity);
+            var rawEntity = _sharedService.GetFurnitureById(id);
+            var mappedEntity = _mapper.Map<Furniture, FurnitureVM>(rawEntity);
             return View(mappedEntity);
         }
 
         [HttpGet]
         public IActionResult Basket()
         {
-            var rawList=_sharedService.GetBasketByUserId(Guid.Empty);//will be changed with IS4
+            var rawList = _sharedService.GetBasketByUserId(Guid.Empty);//will be changed with IS4
             var mapedlist = _mapper.Map<IEnumerable<Furniture>, IEnumerable<FurnitureVM>>(rawList);
             return View(mapedlist);
         }

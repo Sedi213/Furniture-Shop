@@ -65,9 +65,17 @@ namespace FurnitureShop.Core.Services
             return _unitOfWork.Furnitures.Get(id);
         }
 
-        public int GetCountOfElement()
+        public int GetCountOfElementByFilter(
+            EnumCategory? category = null,
+            int? minPrice = null,
+            int? maxPrice = null,
+            string containPart = "")
         {
-            return _unitOfWork.Furnitures.GetAll().Count();
+            return _unitOfWork.Furnitures.GetCountFurnitureEntityByFilter(
+                                                          category,
+                                                          minPrice,
+                                                          maxPrice,
+                                                          containPart);
         }
         public IEnumerable<Furniture> GetBasketByUserId(Guid userId)
         {

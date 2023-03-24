@@ -17,5 +17,11 @@ namespace FurnitureShop.Core.Interface.RepositoryInterfaces
             int? minPrice = null,
             int? maxPrice = null,
             string containPart = "");
+        public int GetCountFurnitureEntityByFilter(
+            EnumCategory? category = null,
+            int? minPrice = null,
+            int? maxPrice = null,
+            string containPart = "");
+
     }
 }
