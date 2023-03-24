@@ -7,16 +7,33 @@
     function RedirectToFurniturePage(id) {
         window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/FurniturePage?id=" + id
     }
+    function RedirectToBasket() {
+        window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/Basket"
+    }
+    async function fetchDeleteBasket(id) {
+        var strBody = JSON.stringify(id);
+        console.log(strBody);
+        await fetch('/Api/DeleteFromBasket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: strBody
+        }).then(RedirectToBasket);
+    }
 </script>
 
 <div class="contn">
     @foreach (var item in Model)
     {
 
-        <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
+        <div class="item" id="@item.Id" >
+            <div onclick ='RedirectToFurniturePage("@item.Id")'>
             <img class="photo" src=@item.ImgUrl />
             <p>@item.Name</p>
             <p>@item.Price</p>
+            </div>
+            <button class="btn btn-info" onclick="fetchDeleteBasket('@item.Id')">Delete</button>
         </div>
     }
 </div>

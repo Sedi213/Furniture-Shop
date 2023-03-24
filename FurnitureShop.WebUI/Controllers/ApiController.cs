@@ -30,6 +30,13 @@ namespace FurnitureShop.WebUI.Controllers
             _sharedService.AddToBasket(Id, Guid.Empty);//With authorize will be changes second param 
             return Ok();
         }
-        
+        [HttpPost]
+        //[Authorize]//feature for future identityserver4
+        public IActionResult DeleteFromBasket([FromBody] Guid Id)
+        {
+            _sharedService.DeleteFromBasket(Id, Guid.Empty);//With authorize will be changes second param 
+            return Ok();
+        }
+
     }
 }

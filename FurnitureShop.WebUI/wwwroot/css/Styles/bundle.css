@@ -23,7 +23,7 @@ body {
   border-radius: 15px;
 }
 
-.item {
+.item-index {
   background-color: rgb(212, 213, 214);
   border-radius: 15px;
   width: 125px;
@@ -37,16 +37,11 @@ body {
   flex-wrap: wrap;
 }
 
-.photo {
-  width: 95px;
-  height: 95px;
-}
-
 .item {
   background-color: rgb(212, 213, 214);
   border-radius: 15px;
   width: 125px;
-  height: 200px;
+  height: 250px;
   margin: 45px;
   padding: 15px;
 }

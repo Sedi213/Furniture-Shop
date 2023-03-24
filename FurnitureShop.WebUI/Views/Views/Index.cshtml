@@ -33,7 +33,7 @@
     @foreach (var item in Model.mapedlist)
     {
 
-        <div class="item" onclick='RedirectToFurniturePage("@item.Id")'>
+        <div class="item-index" onclick='RedirectToFurniturePage("@item.Id")'>
             <img class="photo" src=@item.ImgUrl />
             <p>@item.Name</p>
             <p>@item.Price</p>

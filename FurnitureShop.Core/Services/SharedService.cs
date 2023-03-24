@@ -58,7 +58,19 @@ namespace FurnitureShop.Core.Services
             }
             await _unitOfWork.SaveAsync();
         }
+        public async Task DeleteFromBasket(Guid furnitureid, Guid userid)
+        {
+            var user = _unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
+            var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id).FirstOrDefault();
 
+            var entities = JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
+            var list = entities.ToList();
+            list.Remove(furnitureid);
+            var newstr = JsonSerializer.Serialize<IEnumerable<Guid>>(list);
+            basket.UserBasketJSONSerializetedFurnitureGuid = newstr;
+
+            await _unitOfWork.SaveAsync();
+        }
 
         public Furniture GetFurnitureById(Guid id)
         {
@@ -87,9 +99,9 @@ namespace FurnitureShop.Core.Services
             }
             var GuidList = JsonSerializer.Deserialize<IEnumerable<Guid>>(basket.UserBasketJSONSerializetedFurnitureGuid);
             var entities = new List<Furniture>();
-            foreach(var item in GuidList) //map from id to entity
+            foreach (var item in GuidList) //map from id to entity
             {
-                entities.Add(_unitOfWork.Furnitures.Find(x=>x.Id==item).First());
+                entities.Add(_unitOfWork.Furnitures.Find(x => x.Id == item).First());
             }
             return entities;
         }
