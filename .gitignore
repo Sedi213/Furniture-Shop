@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+FurnitureShop.WebUI/wwwroot/css/Styles/bundle.css
+FurnitureShop.WebUI/wwwroot/css/Styles/bundle.min.css
+FurnitureShop.WebUI/wwwroot/css/Styles/Basket.css
+FurnitureShop.WebUI/wwwroot/css/Styles/FurniturePage.css
+FurnitureShop.WebUI/wwwroot/css/Styles/Index.css

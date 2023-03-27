@@ -38,7 +38,7 @@ namespace FurnitureShop.Core.Services
 
         public async Task AddToBasket(Guid furnitureid, Guid userid)
         {
-            var user = _unitOfWork.Users.GetAll().First();//For some while , will be changed with identityserver4
+            var user = _unitOfWork.Users.GetAll().First();//TODO For some while , will be changed with identityserver4
             var basket = _unitOfWork.Baskets.Find(x => x.User.Id == user.Id).FirstOrDefault();
 
             if (basket != null)

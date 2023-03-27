@@ -3,8 +3,8 @@
     ViewData["Title"] = "Home Page";
 
     //logit to corect view
-    int takeInt = int.Parse(Model.previousQuery["take"]);
-    int skipInt = int.Parse(Model.previousQuery["skip"]);
+    int takeInt = int.Parse(Model.PreviousQuery["take"]);
+    int skipInt = int.Parse(Model.PreviousQuery["skip"]);
 }
 
 
@@ -30,7 +30,7 @@
 
 <div class="contn">
 
-    @foreach (var item in Model.mapedlist)
+    @foreach (var item in Model.Mapedlist)
     {
 
         <div class="item-index" onclick='RedirectToFurniturePage("@item.Id")'>
@@ -46,4 +46,4 @@
        asp-controller='Views'
        asp-paged-list-url='Index'
        asp-route-parameter="skip"
-       asp-route-data=@Model.previousQuery></pager>
+       asp-route-data=@Model.PreviousQuery></pager>

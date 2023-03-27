@@ -39,9 +39,9 @@ namespace FurnitureShop.WebUI.Controllers
             
             var VM = new IndexVM()
             {
-                mapedlist = mapedlist,
+                Mapedlist = mapedlist,
                 CountMappedItem = count,
-                previousQuery = GetDictionaryQueryByDTO(dto)
+                PreviousQuery = GetDictionaryQueryByDTO(dto)
             };
             return View(VM);
         }
