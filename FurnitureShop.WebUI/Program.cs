@@ -1,5 +1,5 @@
 using FurnitureShop.Core;
-using FurnitureShop.WebUI.Mapping;
+using FurnitureShop.WebUI.MappingProfile;
 using FurnitureShop.Infrastructure.Data;
 using System.Reflection;
 

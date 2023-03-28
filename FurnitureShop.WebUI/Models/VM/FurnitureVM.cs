@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FurnitureShop.WebUI.Mapping;
+using FurnitureShop.WebUI.MappingProfile;
 using FurnitureShop.Core.Models;
 
 namespace FurnitureShop.WebUI.Models.VM

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace FurnitureShop.WebUI.Mapping
+namespace FurnitureShop.WebUI.MappingProfile
 {
     public interface IMapWith<T>
     {

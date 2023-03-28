@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FurnitureShop.WebUI.Mapping
+namespace FurnitureShop.WebUI.MappingProfile
 {
     public class AssemblyMappingProfile : Profile
     {
