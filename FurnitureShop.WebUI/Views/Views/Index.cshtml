@@ -1,0 +1,50 @@
+﻿@model IndexVM
+@{
+    ViewData["Title"] = "Home Page";
+
+    //logit to corect view
+    int takeInt = int.Parse(Model.PreviousQuery["take"]);
+    int skipInt = int.Parse(Model.PreviousQuery["skip"]);
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizator;
+
+<script>
+    function RedirectToFurniturePage(id) {
+        window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/FurniturePage?id=" + id
+    }
+</script>
+
+<div id="filter" class="filter">
+    <form asp-action="Index" asp-controller="Views" method="get">
+        <label>@Localizator["Name"] : </label>
+        <input type="text" name="containPart" />
+        <label>@Localizator["minPrice"] : </label>
+        <input type="number" name="minPrice" />
+        <label>@Localizator["maxPrice"] : </label>
+        <input type="number" name="maxPrice" />
+        <label>@Localizator["Category"] : </label>
+        <input type="number" name="category" />
+        <button type="submit">@Localizator["Filter"]</button>
+    </form>
+</div>
+
+<div class="contn">
+
+    @foreach (var item in Model.Mapedlist)
+    {
+
+        <div class="item-index" onclick='RedirectToFurniturePage("@item.Id")'>
+            <img class="photo" src=@item.ImgUrl />
+            <p>@item.Name</p>
+            <p>@item.Price</p>
+        </div>
+    }
+</div>
+<pager asp-paged-total-element=@Model.CountMappedItem;
+       asp-paged-index=@skipInt/@takeInt
+       asp-paged-take=@takeInt
+       asp-controller='Views'
+       asp-paged-list-url='Index'
+       asp-route-parameter="skip"
+       asp-route-data=@Model.PreviousQuery></pager>

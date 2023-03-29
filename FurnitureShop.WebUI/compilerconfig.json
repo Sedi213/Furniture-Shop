@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/Styles/Index.css",
+    "inputFile": "wwwroot/css/Styles/Index.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Styles/Basket.css",
+    "inputFile": "wwwroot/css/Styles/Basket.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Styles/FunirutePage.css",
+    "inputFile": "wwwroot/css/Styles/FunirutePage.scss"
+  }
+]

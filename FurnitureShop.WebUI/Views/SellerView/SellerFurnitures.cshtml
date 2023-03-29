@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SellerFurnitureVM>
+
+<div class="contn">
+
+    @foreach (var item in Model)
+    {
+
+        <div class="item-index" onclick='RedirectToFurniturePage("@item.Id")'>
+            <img class="photo" src=@item.ImgUrl />
+            <p>@item.Name</p>
+            <p>@item.Price</p>
+        </div>
+    }
+</div>

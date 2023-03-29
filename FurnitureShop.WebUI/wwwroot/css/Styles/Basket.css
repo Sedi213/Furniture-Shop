@@ -1,0 +1,13 @@
+﻿.item {
+  background-color: rgb(212, 213, 214);
+  border-radius: 15px;
+  width: 125px;
+  height: 250px;
+  margin: 45px;
+  padding: 15px;
+}
+
+.contn {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,47 @@
+﻿@model FurnitureVM
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizator;
+
+
+<div class="contn">
+    <img class="mainphoto" src=@Model.ImgUrl />
+    <div class="text-block">
+        <p>@Localizator["Name"] : @Model.Name</p>
+        <p>@Localizator["Category"] : @Model.Category </p>
+        <p>@Localizator["Price"] : @Model.Price $</p>
+        <input type="hidden" id="hidden" value="@Model.Id" />
+        <button id="btn">@Localizator["Order"]</button>
+    </div>
+
+</div>
+
+
+<script>
+
+    var elem = document.getElementById("btn");
+    elem.addEventListener("click", () => {
+        fetchToBasket();
+    });
+
+
+    var id = document.getElementById("hidden").value;
+    function RedirectToBasket() {
+        window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/Basket"
+    }
+    async function fetchToBasket() {
+        var strBody = JSON.stringify(id);
+        console.log(strBody);
+        await fetch('/Api/AddToBasket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: strBody
+        }).then(RedirectToBasket);
+    }
+
+
+</script>
