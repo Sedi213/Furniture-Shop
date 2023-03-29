@@ -2,18 +2,18 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizator;
 
 
 <div class="contn">
     <img class="mainphoto" src=@Model.ImgUrl />
     <div class="text-block">
-        <p>Name : @Model.Name</p>
-        <p>Category : @Model.Category </p>
-        <p>Price : @Model.Price $</p>
+        <p>@Localizator["Name"] : @Model.Name</p>
+        <p>@Localizator["Category"] : @Model.Category </p>
+        <p>@Localizator["Price"] : @Model.Price $</p>
         <input type="hidden" id="hidden" value="@Model.Id" />
-        <button id="btn">Order</button>
+        <button id="btn">@Localizator["Order"]</button>
     </div>
 
 </div>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FurnitureShop.WebUI.styles.css" asp-append-version="true" />
-    <environment include="Development">       
+    <environment include="Development">
         <link href="~/css/styles/bundle.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
@@ -30,6 +30,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Views" asp-action="Basket">Basket</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @await Html.PartialAsync("_CulturePartial")
                         </li>
                     </ul>
                 </div>

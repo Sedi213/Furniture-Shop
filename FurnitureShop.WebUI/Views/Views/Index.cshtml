@@ -6,7 +6,8 @@
     int takeInt = int.Parse(Model.PreviousQuery["take"]);
     int skipInt = int.Parse(Model.PreviousQuery["skip"]);
 }
-
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizator;
 
 <script>
     function RedirectToFurniturePage(id) {
@@ -16,15 +17,15 @@
 
 <div id="filter" class="filter">
     <form asp-action="Index" asp-controller="Views" method="get">
-        <label>Name : </label>
+        <label>@Localizator["Name"] : </label>
         <input type="text" name="containPart" />
-        <label>min Price : </label>
+        <label>@Localizator["minPrice"] : </label>
         <input type="number" name="minPrice" />
-        <label>max Price : </label>
+        <label>@Localizator["maxPrice"] : </label>
         <input type="number" name="maxPrice" />
-        <label>Category : </label>
+        <label>@Localizator["Category"] : </label>
         <input type="number" name="category" />
-        <button type="submit">Filter</button>
+        <button type="submit">@Localizator["Filter"]</button>
     </form>
 </div>
 

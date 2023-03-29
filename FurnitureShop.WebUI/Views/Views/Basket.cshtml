@@ -1,8 +1,9 @@
-﻿@model IEnumerable<FurnitureVM>
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@model IEnumerable<FurnitureVM>
 @{
     ViewData["Title"] = "Home Page";
 }
-
+@inject IViewLocalizer Localizator;
 <script>
     function RedirectToFurniturePage(id) {
         window.location.href = window.location.protocol + "//" + window.location.host + "/" + "Views/FurniturePage?id=" + id
@@ -33,7 +34,8 @@
             <p>@item.Name</p>
             <p>@item.Price</p>
             </div>
-            <button class="btn btn-info" onclick="fetchDeleteBasket('@item.Id')">Delete</button>
+            <button class="btn btn-info" onclick="fetchDeleteBasket('@item.Id')">
+                @Localizator["Delete"]</button>
         </div>
     }
 </div>

@@ -5,6 +5,7 @@ using FurnitureShop.WebUI.Models;
 using FurnitureShop.WebUI.Models.DTO;
 using FurnitureShop.WebUI.Models.VM;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,10 +23,21 @@ namespace FurnitureShop.WebUI.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost]
+        public IActionResult SetCulture(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(30) }
+            );
+            return LocalRedirect(returnUrl);
+        }
+
 
         [HttpPost]
         //[Authorize]//feature for future identityserver4
-        public IActionResult AddToBasket([FromBody]Guid Id)
+        public IActionResult AddToBasket([FromBody] Guid Id)
         {
             _sharedService.AddToBasket(Id, Guid.Empty);//With authorize will be changes second param 
             return Ok();
